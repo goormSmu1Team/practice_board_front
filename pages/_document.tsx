@@ -1,4 +1,4 @@
-import Document, { Html, Head, Main, NextScript } from "next/document"
+import Document, { Html, Head, Main, NextScript } from "next/document";
 
 export default class RootDocument extends Document {
   render() {
@@ -21,7 +21,8 @@ export default class RootDocument extends Document {
               margin: 0;
               padding: 0;
               box-sizing: border-box;
-              overflow: hidden;
+
+              /* overflow: hidden; */
             }
           `}</style>
         </Head>
@@ -30,6 +31,6 @@ export default class RootDocument extends Document {
           <NextScript />
         </body>
       </Html>
-    )
+    );
   }
 }
