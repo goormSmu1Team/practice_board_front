@@ -26,7 +26,7 @@ const HeaderContainer = styled.div`
 
 const HeaderItem = styled.div`
   flex-direction: column;
-  font-size: 15px;
+  font-size: 13px;
   width: 100%;
   background-color: white;
   display: flex;
@@ -35,6 +35,6 @@ const HeaderItem = styled.div`
 `;
 
 const HeadersubItem = styled.div`
-  font-size: 11px;
+  font-size: 13px;
   color: gray;
 `;
