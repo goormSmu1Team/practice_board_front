@@ -1,14 +1,28 @@
 import React from "react";
 import styled from "styled-components";
+import { useRouter } from "next/router";
 
+import ReadingGlasses from "../assets/header/ReadingGlasses.svg";
+import VericalDot from "../assets/header/VerticalDots.svg";
 const Header = () => {
-  console.log("Header Rendered");
+  const router = useRouter();
+
+  //   const isActive = (path: string) => router.pathname.startsWith(path);
+
   return (
     <HeaderContainer>
       <HeaderItem>
         자유게시판
         <HeadersubItem>상명대 천안캠</HeadersubItem>
       </HeaderItem>
+      <HeaderBt>
+        <HeaderRG onClick={() => router.push("/search")}>
+          <ReadingGlasses />
+        </HeaderRG>
+        <HeaderVD onClick={() => router.push("/menu")}>
+          <VericalDot />
+        </HeaderVD>
+      </HeaderBt>
     </HeaderContainer>
   );
 };
@@ -30,11 +44,24 @@ const HeaderItem = styled.div`
   width: 100%;
   background-color: white;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  padding-top: 12px;
+  padding-left: 70px;
+  /* justify-content: center;
+  align-items: center; */
 `;
 
 const HeadersubItem = styled.div`
   font-size: 13px;
   color: gray;
 `;
+
+const HeaderBt = styled.div`
+  margin-right: 5%;
+  margin-top: 20px;
+  display: flex;
+  gap: 30px;
+`;
+
+const HeaderRG = styled.div``;
+
+const HeaderVD = styled.div``;
