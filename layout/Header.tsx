@@ -36,6 +36,7 @@ const HeaderContainer = styled.div`
   width: 100%;
   height: 50px;
   top: 0;
+  background-color: white;
 `;
 
 const HeaderItem = styled.div`
