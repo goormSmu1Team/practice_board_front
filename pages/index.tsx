@@ -1,9 +1,25 @@
+import Footer from "../layout/Footer";
 import Header from "../layout/Header";
+// import GlobalStyle from "../styles/GlobalStyle";
 export default function Home() {
   return (
-    <div>
-      hi
-      {/* 여기다가 원하는 컴포넌트를 부르면 됌 */}
+    <div
+    // style={{
+    //   position: "relative",
+    //   width: "100%",
+    //   height: "100%",
+    // }}
+    >
+      {/* <GlobalStyle /> */}
+      {/* <div
+      style={{
+        
+      }}>
+        <Header />
+      </div>
+      <div>
+        <Footer />
+      </div> */}
     </div>
   );
 }
