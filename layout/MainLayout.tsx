@@ -4,6 +4,7 @@ import { useRouter } from "next/router"; // useRouter import 추가
 import Footer from "./Footer";
 import Header from "./Header";
 import SearchHeader from "../components/SearchHeader";
+import WriteHeader from "../components/WriteHeader";
 
 // 해당 MainLayOut컴포넌트는 전체 뷰를 적용하게 하는 컴포넌트로 여기다가 레이아웃 짜고 App.tsx에 랜더링 시킴
 interface MainLayoutProps {
@@ -17,12 +18,21 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   const hideHeader =
     router.pathname === "/search" || router.pathname === "/write";
   const showSearchHeader = router.pathname === "/search"; // search 경로일 때만 SearchHeader 표시
+  const showWriteHeader = router.pathname === "/write"; // write 경로일 때만 WriteHeader 표시
   const hideFooter =
-    router.pathname === "/menu" || router.pathname === "/search";
+    router.pathname === "/menu" ||
+    router.pathname === "/search" ||
+    router.pathname === "/write";
 
   return (
     <>
-      {showSearchHeader ? <SearchHeader /> : !hideHeader && <Header />}
+      {showSearchHeader ? (
+        <SearchHeader />
+      ) : showWriteHeader ? (
+        <WriteHeader />
+      ) : !hideHeader ? (
+        <Header />
+      ) : null}
 
       <Main>{children}</Main>
       {!hideFooter && <Footer />}
@@ -35,8 +45,8 @@ export default MainLayout;
 const Main = styled.main`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  /* justify-content: center;
+  align-items: center; */
   max-width: 430px;
   margin: 0 auto;
   min-height: calc(100vh - 50px);
