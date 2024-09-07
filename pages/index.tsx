@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import styled from "styled-components";
 
 interface Board {
   id: number;
@@ -19,6 +20,7 @@ export default function Home() {
     try {
       const response = await axios.get("/api/proxy"); // 프록시 API 경로 사용
       setBoards(response.data);
+      console.log(response.data);
     } catch (error) {
       console.error("API 호출 중 오류 발생", error);
     }
@@ -29,9 +31,8 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
-      <h1>게시판 목록</h1>
-      <ul>
+    <MainContainer>
+      <MainListContainer>
         {boards.map((board) => (
           <li key={board.id}>
             <h2>{board.title}</h2>
@@ -42,7 +43,11 @@ export default function Home() {
             <p>조회수: {board.viewCount}</p>
           </li>
         ))}
-      </ul>
-    </div>
+      </MainListContainer>
+    </MainContainer>
   );
 }
+
+const MainContainer = styled.div``;
+
+const MainListContainer = styled.div``;
