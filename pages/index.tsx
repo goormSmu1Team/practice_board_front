@@ -1,9 +1,6 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
-import axiosInstance from "../lib/axios"; // axios instance 경로
-import Footer from "../layout/Footer";
-import Header from "../layout/Header";
 
-// 게시판 데이터의 타입을 정의
 interface Board {
   id: number;
   title: string;
@@ -11,26 +8,24 @@ interface Board {
   createdDate: string;
   viewCount: number;
   likeCount: number | null;
-  comments: string[]; // comments는 배열로 가정
+  comments: string[];
 }
 
 export default function Home() {
-  const [boards, setBoards] = useState<Board[]>([]); // 상태에 Board[] 타입 지정
+  const [boards, setBoards] = useState<Board[]>([]);
 
   // 게시판 데이터를 가져오는 함수
   const fetchBoards = async () => {
     try {
-      const response = await axiosInstance.get("/board"); // /board로 API 요청
-      setBoards(response.data); // 가져온 데이터를 상태에 저장
-      console.log(response.data);
+      const response = await axios.get("/api/proxy"); // 프록시 API 경로 사용
+      setBoards(response.data);
     } catch (error) {
       console.error("API 호출 중 오류 발생", error);
     }
   };
 
-  // 컴포넌트가 렌더링될 때 호출
   useEffect(() => {
-    fetchBoards(); // 게시판 데이터를 가져오는 함수 호출
+    fetchBoards(); // 컴포넌트가 렌더링될 때 게시판 데이터 가져오기
   }, []);
 
   return (
