@@ -22,7 +22,8 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   const hideFooter =
     router.pathname === "/menu" ||
     router.pathname === "/search" ||
-    router.pathname === "/write";
+    router.pathname === "/write" ||
+    router.pathname === "/content";
 
   return (
     <>

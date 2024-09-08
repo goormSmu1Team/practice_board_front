@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
@@ -14,7 +15,7 @@ interface Board {
 
 export default function Home() {
   const [boards, setBoards] = useState<Board[]>([]);
-
+  const router = useRouter();
   // 게시판 데이터를 가져오는 함수
   const fetchBoards = async () => {
     try {
@@ -32,7 +33,7 @@ export default function Home() {
 
   return (
     <MainListContainer>
-      <MainContainerLine>
+      <MainContainerLine onClick={() => router.push("/content")}>
         {/* {boards.map((board) => (
         <MainListContainer>
         <MainContainerLine/>
