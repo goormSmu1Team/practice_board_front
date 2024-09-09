@@ -4,13 +4,18 @@ import { useRouter } from "next/router";
 
 import ReadingGlasses from "../assets/header/ReadingGlasses.svg";
 import VericalDot from "../assets/header/VerticalDots.svg";
+import Back from "../assets/header/Back.svg";
 const Header = () => {
   const router = useRouter();
-
+  const ShowBack = router.pathname === "/content";
   //   const isActive = (path: string) => router.pathname.startsWith(path);
 
   return (
     <HeaderContainer>
+      <HeaderBack onClick={() => router.push("/")}>
+        {ShowBack && <Back />}
+      </HeaderBack>
+
       <HeaderItem>
         자유게시판
         <HeadersubItem>상명대 천안캠</HeadersubItem>
@@ -37,6 +42,11 @@ const HeaderContainer = styled.div`
   height: 50px;
   top: 0;
   background-color: white;
+`;
+const HeaderBack = styled.div`
+  margin-top: 18px;
+  margin-left: 3%;
+  width: 20px;
 `;
 
 const HeaderItem = styled.div`

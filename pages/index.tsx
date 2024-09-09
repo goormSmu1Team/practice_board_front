@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import MainContent from "../components/MainContent";
 
+import Nonp from "../assets/header/NonPerson.svg";
+import Good from "../assets/header/Good.svg";
 interface Board {
   id: number;
   title: string;
@@ -56,37 +58,72 @@ export default function Home() {
     //       <MainViewCount>|1</MainViewCount>
     //     </MainDetail>
     //   </MainContainerLine>
+
     // </MainListContainer>
-    <MainContent boards={boards} />
+
+    // <MainContent boards={boards} />
+    <>
+      <UserContainer>
+        <Nonp />
+        <UserBox>
+          <UserName>익명</UserName>
+          <MainDate>19:22</MainDate>
+        </UserBox>
+      </UserContainer>
+      <MainTitle>제목1</MainTitle>
+      <MainCont>내용이이이이이</MainCont>
+      <MainDetail>
+        <MainViewCount>
+          <Good />
+          :2
+        </MainViewCount>
+      </MainDetail>
+    </>
   );
 }
+const UserContainer = styled.div`
+  margin-top: 10px;
+  margin-left: 4%;
+  display: flex;
+  gap: 12px;
+`;
+const UserName = styled.div`
+  font-weight: 600;
+`;
+const UserBox = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
-// const MainContainerLine = styled.div`
-//   width: 100%;
-//   height: 1px;
-//   background: #f4f4f4;
-//   margin: 5px auto 0rem auto;
-// `;
+const MainDate = styled.div`
+  font-size: 15px;
+  color: #a8aaad;
+`;
+const MainContainerLine = styled.div`
+  width: 100%;
+  height: 1px;
+  background: #f4f4f4;
+  margin: 5px auto 0rem auto;
+`;
 
-// const MainListContainer = styled.div`
-//   width: 100%;
-//   height: 130px;
-// `;
+const MainListContainer = styled.div`
+  width: 100%;
+  height: 130px;
+`;
 
-// const MainTitle = styled.h3`
-//   margin-left: 2%;
-//   padding-top: 20px;
-// `;
-// const MainContent = styled.div`
-//   margin-left: 2%;
-//   padding-top: 5px;
-// `;
-// const MainDetail = styled.div`
-//   margin-left: 2%;
-//   padding-top: 6px;
-//   display: flex;
-//   font-size: 15px;
-//   color: #ebedf0;
-// `;
-// const MainDate = styled.div``;
-// const MainViewCount = styled.div``;
+const MainTitle = styled.h3`
+  margin-left: 4%;
+  padding-top: 18px;
+`;
+const MainCont = styled.div`
+  margin-left: 4%;
+  padding-top: 8px;
+`;
+const MainDetail = styled.div`
+  margin-left: 4%;
+  padding-top: 6px;
+  display: flex;
+  font-size: 15px;
+  color: #fa1622;
+`;
+const MainViewCount = styled.div``;
