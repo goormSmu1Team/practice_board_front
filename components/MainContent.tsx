@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import React from "react";
-import Link from "next/link"; // next/link에서 Link 가져오기
+import Link from "next/link";
 
 interface Board {
   id: number;
@@ -19,18 +19,26 @@ const MainContent = ({ boards }: { boards: Board[] }) => {
   return (
     <MainListContainer>
       {boards.map((board) => (
-        <Link key={board.id} href={`/contents/${board.id}`} passHref>
-          <MainContainerLine>
-            <MainTitle>{board.title}</MainTitle>
-            <MainCont>{board.content}</MainCont>
-            <MainDetail>
-              <MainDate>
-                작성일: {new Date(board.createdDate).toLocaleString()}
-              </MainDate>
-              <MainViewCount>| 조회수: {board.viewCount}</MainViewCount>
-            </MainDetail>
-          </MainContainerLine>
-        </Link>
+        <MainBox key={board.id}>
+          <Link
+            href={{
+              pathname: `/contents/[id]`, // Dynamic routing 사용
+              query: { id: board.id },
+            }}
+            passHref
+          >
+            <MainContainerLine>
+              <MainTitle>{board.title}</MainTitle>
+              <MainCont>{board.content}</MainCont>
+              <MainDetail>
+                <MainDate>
+                  작성일: {new Date(board.createdDate).toLocaleString()}
+                </MainDate>
+                <MainViewCount>| 조회수: {board.viewCount}</MainViewCount>
+              </MainDetail>
+            </MainContainerLine>
+          </Link>
+        </MainBox>
       ))}
     </MainListContainer>
   );
@@ -48,7 +56,6 @@ const MainContainerLine = styled.div`
 
 const MainListContainer = styled.div`
   width: 100%;
-  height: 130px;
 `;
 
 const MainTitle = styled.h3`
@@ -66,9 +73,13 @@ const MainDetail = styled.div`
   padding-top: 6px;
   display: flex;
   font-size: 15px;
-  color: #ebedf0;
+  color: #bebfc2;
 `;
 
 const MainDate = styled.div``;
 
 const MainViewCount = styled.div``;
+const MainBox = styled.div`
+  width: 100%;
+  height: 100px;
+`;
