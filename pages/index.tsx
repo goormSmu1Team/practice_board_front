@@ -2,6 +2,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import MainContent from "../components/MainContent";
 
 interface Board {
   id: number;
@@ -32,59 +33,60 @@ export default function Home() {
   }, []);
 
   return (
-    <MainListContainer>
-      <MainContainerLine onClick={() => router.push("/content")}>
-        {/* {boards.map((board) => (
-        <MainListContainer>
-        <MainContainerLine/>
-          <li key={board.id}>
-            <MainListContainer>{board.title}</MainListContainer>
-            <MainContent>{board.content}</MainContent>
-            <MainDetail>
-          <MainDate>작성일: {new Date(board.createdDate).toLocaleString()}</MainDate>
-          <MainViewCount>|조회수: {board.viewCount}</MainViewCount>
-        </MainDetail>
-           
-          </li>
-          <MainListContainer/>
-        ))} */}
-        <MainTitle>제목1</MainTitle>
-        <MainContent>내용이이이이이</MainContent>
-        <MainDetail>
-          <MainDate>19:22</MainDate>
-          <MainViewCount>|1</MainViewCount>
-        </MainDetail>
-      </MainContainerLine>
-    </MainListContainer>
+    // <MainListContainer>
+    //   <MainContainerLine onClick={() => router.push("/contents")}>
+    //     {/* {boards.map((board) => (
+    //     <MainListContainer>
+    //     <MainContainerLine/>
+    //       <li key={board.id}>
+    //         <MainListContainer>{board.title}</MainListContainer>
+    //         <MainContent>{board.content}</MainContent>
+    //         <MainDetail>
+    //       <MainDate>작성일: {new Date(board.createdDate).toLocaleString()}</MainDate>
+    //       <MainViewCount>|조회수: {board.viewCount}</MainViewCount>
+    //     </MainDetail>
+
+    //       </li>
+    //       <MainListContainer/>
+    //     ))} */}
+    //     <MainTitle>제목1</MainTitle>
+    //     <MainContent>내용이이이이이</MainContent>
+    //     <MainDetail>
+    //       <MainDate>19:22</MainDate>
+    //       <MainViewCount>|1</MainViewCount>
+    //     </MainDetail>
+    //   </MainContainerLine>
+    // </MainListContainer>
+    <MainContent boards={boards} />
   );
 }
 
-const MainContainerLine = styled.div`
-  width: 100%;
-  height: 1px;
-  background: #f4f4f4;
-  margin: 5px auto 0rem auto;
-`;
+// const MainContainerLine = styled.div`
+//   width: 100%;
+//   height: 1px;
+//   background: #f4f4f4;
+//   margin: 5px auto 0rem auto;
+// `;
 
-const MainListContainer = styled.div`
-  width: 100%;
-  height: 130px;
-`;
+// const MainListContainer = styled.div`
+//   width: 100%;
+//   height: 130px;
+// `;
 
-const MainTitle = styled.h3`
-  margin-left: 2%;
-  padding-top: 20px;
-`;
-const MainContent = styled.div`
-  margin-left: 2%;
-  padding-top: 5px;
-`;
-const MainDetail = styled.div`
-  margin-left: 2%;
-  padding-top: 6px;
-  display: flex;
-  font-size: 15px;
-  color: #ebedf0;
-`;
-const MainDate = styled.div``;
-const MainViewCount = styled.div``;
+// const MainTitle = styled.h3`
+//   margin-left: 2%;
+//   padding-top: 20px;
+// `;
+// const MainContent = styled.div`
+//   margin-left: 2%;
+//   padding-top: 5px;
+// `;
+// const MainDetail = styled.div`
+//   margin-left: 2%;
+//   padding-top: 6px;
+//   display: flex;
+//   font-size: 15px;
+//   color: #ebedf0;
+// `;
+// const MainDate = styled.div``;
+// const MainViewCount = styled.div``;

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+
 interface Board {
   id: number;
   title: string;
@@ -20,5 +21,9 @@ export default function Content() {
       console.error("API 호출 중 오류 발생", error);
     }
   };
-  return <></>;
+  return (
+    <>
+      <div>ss</div>
+    </>
+  );
 }
