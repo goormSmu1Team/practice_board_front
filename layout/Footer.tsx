@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useRouter } from "next/router";
 
 import Pencil from "../assets/footer/Pencil.svg";
+import Link from "next/link";
 
 const Footer = () => {
   const router = useRouter();
@@ -11,14 +12,16 @@ const Footer = () => {
 
   return (
     <FooterContainer>
-      <FooterItem>
-        <FooterItemContent>
-          <FooterIcon>
-            <Pencil />
-          </FooterIcon>
-          글 쓰기
-        </FooterItemContent>
-      </FooterItem>
+      <Link href="/write">
+        <FooterItem>
+          <FooterItemContent>
+            <FooterIcon>
+              <Pencil />
+            </FooterIcon>
+            글 쓰기
+          </FooterItemContent>
+        </FooterItem>
+      </Link>
     </FooterContainer>
   );
 };
