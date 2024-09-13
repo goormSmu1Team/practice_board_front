@@ -5,6 +5,7 @@ import Footer from "./Footer";
 import Header from "./Header";
 import SearchHeader from "../components/SearchHeader";
 import WriteHeader from "../components/WriteHeader";
+import PageTransition from "../components/PageTransition/PageTransition";
 
 // 해당 MainLayOut컴포넌트는 전체 뷰를 적용하게 하는 컴포넌트로 여기다가 레이아웃 짜고 App.tsx에 랜더링 시킴
 interface MainLayoutProps {
@@ -27,16 +28,18 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
 
   return (
     <>
-      {showSearchHeader ? (
-        <SearchHeader />
-      ) : showWriteHeader ? (
-        <WriteHeader />
-      ) : !hideHeader ? (
-        <Header />
-      ) : null}
+      <PageTransition>
+        {showSearchHeader ? (
+          <SearchHeader />
+        ) : showWriteHeader ? (
+          <WriteHeader />
+        ) : !hideHeader ? (
+          <Header />
+        ) : null}
 
-      <Main>{children}</Main>
-      {!hideFooter && <Footer />}
+        <Main>{children}</Main>
+        {!hideFooter && <Footer />}
+      </PageTransition>
     </>
   );
 };

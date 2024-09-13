@@ -11,8 +11,8 @@ const Footer = () => {
   const isActive = (path: string) => router.pathname.startsWith(path);
 
   return (
-    <FooterContainer>
-      <Link href="/write">
+    <Link href="/write">
+      <FooterContainer>
         <FooterItem>
           <FooterItemContent>
             <FooterIcon>
@@ -21,8 +21,8 @@ const Footer = () => {
             글 쓰기
           </FooterItemContent>
         </FooterItem>
-      </Link>
-    </FooterContainer>
+      </FooterContainer>
+    </Link>
   );
 };
 
