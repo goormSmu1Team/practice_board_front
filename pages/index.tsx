@@ -61,24 +61,24 @@ export default function Home() {
 
     // </MainListContainer>
 
-    <MainContent boards={boards} />
-    // <>
-    //   <UserContainer>
-    //     <Nonp />
-    //     <UserBox>
-    //       <UserName>익명</UserName>
-    //       <MainDate>19:22</MainDate>
-    //     </UserBox>
-    //   </UserContainer>
-    //   <MainTitle>제목1</MainTitle>
-    //   <MainCont>내용이이이이이</MainCont>
-    //   <MainDetail>
-    //     <MainViewCount>
-    //       <Good />
-    //       :2
-    //     </MainViewCount>
-    //   </MainDetail>
-    // </>
+    // <MainContent boards={boards} />
+    <>
+      <UserContainer>
+        <Nonp />
+        <UserBox>
+          <UserName>익명</UserName>
+          <MainDate>19:22</MainDate>
+        </UserBox>
+      </UserContainer>
+      <MainTitle>제목1</MainTitle>
+      <MainCont>내용이이이이이</MainCont>
+      <MainDetail>
+        <MainViewCount>
+          <Good />
+          :2
+        </MainViewCount>
+      </MainDetail>
+    </>
   );
 }
 const UserContainer = styled.div`

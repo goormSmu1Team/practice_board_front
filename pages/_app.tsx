@@ -1,6 +1,7 @@
 import { AppProps } from "next/app";
 import GlobalStyle from "../styles/GlobalStyle";
 import MainLayout from "../layout/MainLayout";
+import PageTransition from "../components/PageTransition/PageTransition";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -13,9 +14,11 @@ function MyApp({ Component, pageProps }: AppProps) {
       }}
     >
       <GlobalStyle />
+      {/* <PageTransition> */}
       <MainLayout>
         <Component {...pageProps} />
       </MainLayout>
+      {/* </PageTransition> */}
     </div>
   );
 }
