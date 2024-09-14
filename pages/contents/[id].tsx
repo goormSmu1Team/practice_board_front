@@ -22,14 +22,17 @@ export default function BoardDetails() {
   // 특정 게시글 데이터를 가져오는 함수
   const fetchBoard = async (boardId: string | string[] | undefined) => {
     if (!boardId) return;
+
     try {
-      const response = await axios.get(`/api/proxy/board/${boardId}`); // 프록시 API를 통해 해당 게시글 데이터 요청
-      setBoard(response.data);
+      // 프록시를 통해 API 데이터를 가져옴
+      const response = await axios.get(`/api/proxy/${boardId}`);
+      setBoard(response.data); // 응답 데이터를 상태에 저장
     } catch (error) {
       console.error("API 호출 중 오류 발생:", error);
     }
   };
 
+  // id가 변경될 때마다 데이터를 다시 가져옴
   useEffect(() => {
     if (id) {
       fetchBoard(id); // id 값이 있을 때만 게시글 데이터 가져오기
