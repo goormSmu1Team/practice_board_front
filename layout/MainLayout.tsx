@@ -20,11 +20,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
     router.pathname === "/search" || router.pathname === "/write";
   const showSearchHeader = router.pathname === "/search"; // search 경로일 때만 SearchHeader 표시
   const showWriteHeader = router.pathname === "/write"; // write 경로일 때만 WriteHeader 표시
-  const hideFooter =
-    router.pathname === "/menu" ||
-    router.pathname === "/search" ||
-    router.pathname === "/write" ||
-    router.pathname === "/content";
+  const hideFooter = router.pathname === "/";
 
   return (
     <>
@@ -38,7 +34,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
         ) : null}
 
         <Main>{children}</Main>
-        {!hideFooter && <Footer />}
+        {hideFooter && <Footer />}
       </PageTransition>
     </>
   );
