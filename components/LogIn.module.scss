@@ -1,0 +1,66 @@
+// 전체 컨테이너 설정
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: whitesmoke;
+  }
+  
+  // 폼 스타일
+  .input-container {
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    gap: 20px;
+    align-items: center;
+  }
+  
+  .h2 {
+    margin-bottom: 20px;
+    font-size: 28px;
+  }
+  
+  // 각 필드 스타일
+  .field {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .label {
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .input {
+    padding: 10px;
+    width: 100%;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+    transition: border 0.2s ease-in-out;
+  }
+  
+  .input:focus {
+    border: 1px solid red;
+  }
+  
+  // 버튼 스타일
+  .submit-button {
+    background-color: red;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
