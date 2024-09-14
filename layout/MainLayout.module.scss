@@ -1,0 +1,16 @@
+.main {
+  display: flex;
+  flex-direction: column;
+//   justify-content: center;
+//   align-items: center; 
+  max-width: 430px;
+  margin: 0 auto;
+  min-height: calc(100vh - 50px);
+
+  @media (min-width: 375px) {
+    width: 430px;
+  }
+  @media (max-width: 500px) {
+    width: 100vw;
+  }
+}
