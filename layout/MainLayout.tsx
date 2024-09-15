@@ -4,9 +4,8 @@ import { useRouter } from "next/router";
 import Footer from "./Footer";
 import Header from "./Header";
 import SearchHeader from "../components/SearchHeader";
-import WriteHeader from "../components/WriteHeader";
+// import WriteHeader from "../components/WriteHeader";
 import PageTransition from "../components/PageTransition/PageTransition";
-import Write from "../pages/write"; // Write 컴포넌트 import
 
 interface MainLayoutProps {
   children: ReactNode;
@@ -33,13 +32,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   return (
     <>
       <PageTransition>
-        {showSearchHeader ? (
-          <SearchHeader />
-        ) : showWriteHeader ? (
-          <WriteHeader onSubmit={handleSubmit} />
-        ) : !hideHeader ? (
-          <Header />
-        ) : null}
+        {showSearchHeader ? <SearchHeader /> : !hideHeader ? <Header /> : null}
 
         <Main>{children}</Main>
         {hideFooter && <Footer />}

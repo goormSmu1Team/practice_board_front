@@ -7,8 +7,6 @@ interface Board {
   content: string;
   createdDate: string;
   viewCount: number;
-  likeCount: number | null;
-  comments: string[];
 }
 
 const MainContent = ({ boards }: { boards: Board[] }) => {
@@ -19,7 +17,7 @@ const MainContent = ({ boards }: { boards: Board[] }) => {
       {boards.map((board) => (
         <MainBox
           key={board.id}
-          onClick={() => router.push(`/contents/${board.id}`)} // 라우팅을 위한 동적 id 전달
+          onClick={() => router.push(`/contents/${board.id}`)} // Navigate on click
         >
           <MainContainerLine>
             <MainTitle>{board.title}</MainTitle>
@@ -52,7 +50,7 @@ const MainContainerLine = styled.div`
   width: 100%;
   height: 1px;
   background: #f4f4f4;
-  margin: 5px auto 0rem auto;
+  margin: 5px auto 0 auto;
   cursor: pointer;
 `;
 
