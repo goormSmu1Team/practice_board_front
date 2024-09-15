@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useRouter } from "next/router";
-
+import styles from "./Header.module.scss"
 import ReadingGlasses from "../assets/header/ReadingGlasses.svg";
 import VericalDot from "../assets/header/VerticalDots.svg";
 import Back from "../assets/header/Back.svg";
@@ -11,68 +11,29 @@ const Header = () => {
   //   const isActive = (path: string) => router.pathname.startsWith(path);
 
   return (
-    <HeaderContainer>
-      <HeaderBack onClick={() => router.push("/")}>
+    <div className={styles["header-container"]}>
+      <div className={styles["header-back"]} onClick={() => router.push("/")}>
         {ShowBack && <Back />}
-      </HeaderBack>
+      </div>
 
-      <HeaderItem>
+      <div className={styles["header-item"]}>
         자유게시판
-        <HeadersubItem>상명대 천안캠</HeadersubItem>
-      </HeaderItem>
-      <HeaderBt>
-        <HeaderRG onClick={() => router.push("/search")}>
+        <div className={styles["header-sub-item"]}>상명대 천안캠</div>
+      </div>
+
+      <div className={styles["header-bt"]}>
+        <div className={styles["header-rg"]} onClick={() => router.push("/search")}>
           <ReadingGlasses />
-        </HeaderRG>
-        <HeaderVD onClick={() => router.push("/menu")}>
+        </div>
+        <div className={styles["header-vd"]} onClick={() => router.push("/menu")}>
           <VericalDot />
-        </HeaderVD>
-      </HeaderBt>
-    </HeaderContainer>
+        </div>
+      </div>
+    </div>
+
+
+
   );
 };
 
 export default Header;
-
-const HeaderContainer = styled.div`
-  display: flex;
-  position: sticky;
-  text-align: center;
-  width: 100%;
-  height: 50px;
-  top: 0;
-  background-color: white;
-`;
-const HeaderBack = styled.div`
-  margin-top: 18px;
-  margin-left: 3%;
-  width: 20px;
-`;
-
-const HeaderItem = styled.div`
-  flex-direction: column;
-  font-size: 13px;
-  width: 100%;
-  background-color: white;
-  display: flex;
-  padding-top: 12px;
-  padding-left: 70px;
-  /* justify-content: center;
-  align-items: center; */
-`;
-
-const HeadersubItem = styled.div`
-  font-size: 13px;
-  color: gray;
-`;
-
-const HeaderBt = styled.div`
-  margin-right: 5%;
-  margin-top: 20px;
-  display: flex;
-  gap: 30px;
-`;
-
-const HeaderRG = styled.div``;
-
-const HeaderVD = styled.div``;
