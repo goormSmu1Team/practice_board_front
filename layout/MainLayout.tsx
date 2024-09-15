@@ -1,26 +1,34 @@
 import React, { ReactNode } from "react";
 import styled from "styled-components";
-import { useRouter } from "next/router"; // useRouter import 추가
+import { useRouter } from "next/router";
 import Footer from "./Footer";
 import Header from "./Header";
 import SearchHeader from "../components/SearchHeader";
 import WriteHeader from "../components/WriteHeader";
 import PageTransition from "../components/PageTransition/PageTransition";
+import Write from "../pages/write"; // Write 컴포넌트 import
 
-// 해당 MainLayOut컴포넌트는 전체 뷰를 적용하게 하는 컴포넌트로 여기다가 레이아웃 짜고 App.tsx에 랜더링 시킴
 interface MainLayoutProps {
-  children: ReactNode; // ReactNode 타입으로 children을 명시적으로 정의
+  children: ReactNode;
 }
 
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
-  const router = useRouter(); // 현재 라우터 정보 가져오기
+  const router = useRouter();
 
   // 특정 경로에서는 Header와 Footer 렌더링 안 함
   const hideHeader =
     router.pathname === "/search" || router.pathname === "/write";
-  const showSearchHeader = router.pathname === "/search"; // search 경로일 때만 SearchHeader 표시
-  const showWriteHeader = router.pathname === "/write"; // write 경로일 때만 WriteHeader 표시
+  const showSearchHeader = router.pathname === "/search";
+  const showWriteHeader = router.pathname === "/write";
   const hideFooter = router.pathname === "/";
+
+  // 상태를 유지하기 위한 함수
+  const handleSubmit = () => {
+    // Write 컴포넌트의 handleSubmit 호출 로직을 추가합니다.
+    // `Write` 컴포넌트와 `handleSubmit`을 연결하는 방법이 필요합니다.
+    console.log("완료 버튼이 클릭되었습니다.");
+    // 필요한 로직을 여기에 추가합니다.
+  };
 
   return (
     <>
@@ -28,7 +36,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
         {showSearchHeader ? (
           <SearchHeader />
         ) : showWriteHeader ? (
-          <WriteHeader />
+          <WriteHeader onSubmit={handleSubmit} />
         ) : !hideHeader ? (
           <Header />
         ) : null}
@@ -45,8 +53,6 @@ export default MainLayout;
 const Main = styled.main`
   display: flex;
   flex-direction: column;
-  /* justify-content: center;
-  align-items: center; */
   max-width: 430px;
   margin: 0 auto;
   min-height: calc(100vh - 50px);
