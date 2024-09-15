@@ -1,6 +1,8 @@
 import React, { ReactNode } from "react";
+
 import styled from "styled-components";
 import { useRouter } from "next/router";
+
 import Footer from "./Footer";
 import Header from "./Header";
 import SearchHeader from "../components/SearchHeader";
@@ -34,12 +36,15 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
       <PageTransition>
         {showSearchHeader ? <SearchHeader /> : !hideHeader ? <Header /> : null}
 
+
         <Main>{children}</Main>
         {hideFooter && <Footer />}
+
       </PageTransition>
     </>
   );
 };
+
 
 export default MainLayout;
 
@@ -57,3 +62,4 @@ const Main = styled.main`
     width: 100vw;
   }
 `;
+
