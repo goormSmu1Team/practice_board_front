@@ -1,7 +1,5 @@
 import { useRouter } from "next/router";
 import styled from "styled-components";
-import React from "react";
-import Link from "next/link";
 
 interface Board {
   id: number;
@@ -19,25 +17,20 @@ const MainContent = ({ boards }: { boards: Board[] }) => {
   return (
     <MainListContainer>
       {boards.map((board) => (
-        <MainBox key={board.id}>
-          <Link
-            href={{
-              pathname: `/contents/[id]`, // Dynamic routing 사용
-              query: { id: board.id },
-            }}
-            passHref
-          >
-            <MainContainerLine>
-              <MainTitle>{board.title}</MainTitle>
-              <MainCont>{board.content}</MainCont>
-              <MainDetail>
-                <MainDate>
-                  작성일: {new Date(board.createdDate).toLocaleString()}
-                </MainDate>
-                <MainViewCount>| 조회수: {board.viewCount}</MainViewCount>
-              </MainDetail>
-            </MainContainerLine>
-          </Link>
+        <MainBox
+          key={board.id}
+          onClick={() => router.push(`/contents/${board.id}`)} // 라우팅을 위한 동적 id 전달
+        >
+          <MainContainerLine>
+            <MainTitle>{board.title}</MainTitle>
+            <MainCont>{board.content}</MainCont>
+            <MainDetail>
+              <MainDate>
+                작성일: {new Date(board.createdDate).toLocaleString()}
+              </MainDate>
+              <MainViewCount>| 조회수: {board.viewCount}</MainViewCount>
+            </MainDetail>
+          </MainContainerLine>
         </MainBox>
       ))}
     </MainListContainer>
@@ -46,16 +39,21 @@ const MainContent = ({ boards }: { boards: Board[] }) => {
 
 export default MainContent;
 
+const MainListContainer = styled.div`
+  width: 100%;
+`;
+
+const MainBox = styled.div`
+  width: 100%;
+  height: 100px;
+`;
+
 const MainContainerLine = styled.div`
   width: 100%;
   height: 1px;
   background: #f4f4f4;
   margin: 5px auto 0rem auto;
   cursor: pointer;
-`;
-
-const MainListContainer = styled.div`
-  width: 100%;
 `;
 
 const MainTitle = styled.h3`
@@ -79,7 +77,3 @@ const MainDetail = styled.div`
 const MainDate = styled.div``;
 
 const MainViewCount = styled.div``;
-const MainBox = styled.div`
-  width: 100%;
-  height: 100px;
-`;

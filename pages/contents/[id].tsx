@@ -3,6 +3,8 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
+import Non from "../../assets/header/NonPerson.svg";
+
 // 게시글 데이터 타입 정의
 interface Board {
   id: number;
@@ -11,28 +13,54 @@ interface Board {
   createdDate: string;
   viewCount: number;
   likeCount: number | null;
-  comments: string[];
 }
+
+// 댓글 데이터 타입 정의
+interface Comment {
+  id: number;
+  comment: string;
+}
+
+type Comments = Comment[];
 
 export default function BoardDetails() {
   const [board, setBoard] = useState<Board | null>(null); // 현재 게시글의 데이터를 저장
+  const [comments, setComment] = useState<Comments>([]); // 현재 댓글의 데이터를 저장
   const router = useRouter();
   const { id } = router.query; // URL에서 동적 id 값을 추출
 
   // 특정 게시글 데이터를 가져오는 함수
   const fetchBoard = async (boardId: string | string[] | undefined) => {
     if (!boardId) return;
+
     try {
-      const response = await axios.get(`/api/proxy/board/${boardId}`); // 프록시 API를 통해 해당 게시글 데이터 요청
-      setBoard(response.data);
+      // 프록시를 통해 API 데이터를 가져옴
+      const response = await axios.get(`/api/proxy/${boardId}`);
+      setBoard(response.data); // 응답 데이터를 상태에 저장
     } catch (error) {
       console.error("API 호출 중 오류 발생:", error);
     }
   };
 
+  // 특정 댓글 데이터를 가져오는 함수
+  const fetchComments = async (CommentId: string | string[] | undefined) => {
+    if (!CommentId) return;
+
+    try {
+      // 프록시를 통해 API 데이터를 가져옴
+      const response = await axios.get(`/api/proxy/${CommentId}/comments`);
+      setComment(response.data); // 응답 데이터를 상태에 저장
+      console.log(response.data);
+    } catch (error) {
+      console.error("API 호출 중 오류 발생:", error);
+    }
+  };
+
+  // id가 변경될 때마다 데이터를 다시 가져옴
   useEffect(() => {
     if (id) {
       fetchBoard(id); // id 값이 있을 때만 게시글 데이터 가져오기
+      fetchComments(id); // id 값이 있을 때만 댓글 데이터 가져오기
     }
   }, [id]);
 
@@ -50,6 +78,21 @@ export default function BoardDetails() {
         </CreatedDate>
         <ViewCount>| 조회수: {board.viewCount}</ViewCount>
       </Detail>
+      <CommentContainer>
+        {comments.length > 0
+          ? comments.map((comment) => (
+              <ContainerLine>
+                <CommentDetail key={comment.id}>
+                  <CommentUserContainer>
+                    <Non />
+                    <CommentUser>익명{comment.id}</CommentUser>
+                  </CommentUserContainer>
+                  <CommentDetailContent>{comment.comment}</CommentDetailContent>
+                </CommentDetail>
+              </ContainerLine>
+            ))
+          : ""}
+      </CommentContainer>
     </Container>
   );
 }
@@ -57,6 +100,7 @@ export default function BoardDetails() {
 // 스타일 정의
 const Container = styled.div`
   padding: 20px;
+  width: 100%;
 `;
 
 const Title = styled.h1`
@@ -79,3 +123,35 @@ const Detail = styled.div`
 const CreatedDate = styled.div``;
 
 const ViewCount = styled.div``;
+
+const CommentContainer = styled.div`
+  margin-top: 10px; // 올바른 px 값 사용
+`;
+
+const CommentDetail = styled.div`
+  padding-top: 5px; // 올바른 px 값 사용
+`;
+const CommentDetailContent = styled.div`
+  padding-top: 5px;
+  font-size: 18px; // 올바른 px 값 사용
+  font-weight: 300;
+`;
+const CommentUserContainer = styled.div`
+  display: flex;
+  padding-top: 6px;
+  padding-bottom: 4px;
+`;
+const CommentUser = styled.div`
+  padding-top: 7px; // 올바른 px 값 사용
+  font-weight: 600;
+  padding-left: 9px;
+`;
+
+const ContainerLine = styled.div`
+  width: 100%;
+  height: 1px;
+  background: #f4f4f4;
+  margin: 5px auto 0rem auto;
+  margin-bottom: 10px;
+  cursor: pointer;
+`;
