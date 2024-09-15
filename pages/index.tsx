@@ -9,8 +9,6 @@ interface Board {
   content: string;
   createdDate: string;
   viewCount: number;
-  likeCount: number | null;
-  comments: string[];
 }
 
 export default function Home() {
@@ -18,8 +16,8 @@ export default function Home() {
 
   const fetchBoards = async () => {
     try {
-      const response = await axios.get("/api/proxy"); // API proxy route to get boards
-      setBoards(response.data);
+      const response = await axios.get("/api/proxy"); // API proxy route
+      setBoards(response.data); // Set the boards state
       console.log(response.data);
     } catch (error) {
       console.error("Error fetching boards:", error);
@@ -27,7 +25,7 @@ export default function Home() {
   };
 
   useEffect(() => {
-    fetchBoards(); // Fetch boards when component mounts
+    fetchBoards(); // Fetch boards on component mount
   }, []);
 
   return <MainContent boards={boards} />;

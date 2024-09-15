@@ -1,7 +1,8 @@
-import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
+import Back from "../assets/header/Back.svg";
+import { useRouter } from "next/router";
 
 export default function Write() {
   const [title, setTitle] = useState(""); // 제목 상태
@@ -9,7 +10,9 @@ export default function Write() {
   const router = useRouter();
 
   // 폼 제출 처리 함수
-  const handleSubmit = async () => {
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault(); // 기본 폼 제출 동작 방지
+
     try {
       // API 라우트로 POST 요청을 보내서 게시글을 생성
       const response = await axios.post("/api/createBoard", {
@@ -24,7 +27,6 @@ export default function Write() {
         alert("게시글이 성공적으로 작성되었습니다.");
         setTitle(""); // 제목 초기화
         setContent(""); // 내용 초기화
-        router.push("/"); // 홈으로 리다이렉트
       }
     } catch (error) {
       console.error("게시글 작성 중 오류 발생:", error);
@@ -32,30 +34,32 @@ export default function Write() {
     }
   };
 
-  // 쿼리 매개변수로 submit=true가 있을 때 handleSubmit 호출
-  useEffect(() => {
-    if (router.query.submit === "true") {
-      handleSubmit();
-    }
-  }, [router.query]);
-
   return (
     <Container>
-      <InputTitleContainer>
-        <StyledInput
-          placeholder="제목"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <Divider />
-      </InputTitleContainer>
-      <InputContentContainer>
-        <StyledInputContent
-          placeholder="내용을 입력하세요"
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-        />
-      </InputContentContainer>
+      <form onSubmit={handleSubmit}>
+        <WriteContainer>
+          <WriteDeleteIcon onClick={() => router.push("/")}>
+            <Back />
+          </WriteDeleteIcon>
+          <WriteTitle>글 쓰기</WriteTitle>
+          <WriteFinishButton type="submit">완료</WriteFinishButton>
+        </WriteContainer>
+        <InputTitleContainer>
+          <StyledInput
+            placeholder="제목"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+          <Divider />
+        </InputTitleContainer>
+        <InputContentContainer>
+          <StyledInputContent
+            placeholder="내용을 입력하세요"
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+          />
+        </InputContentContainer>
+      </form>
     </Container>
   );
 }
@@ -105,4 +109,44 @@ const Divider = styled.div`
   height: 1px;
   background: #f4f4f4;
   margin: 5px auto 0rem auto;
+`;
+
+const WriteContainer = styled.div`
+  display: flex;
+  position: sticky;
+  width: 100%;
+  height: 50px;
+  top: 0;
+  background-color: white;
+`;
+
+const WriteDeleteIcon = styled.div`
+  margin: 12px 38% 0px 15px;
+`;
+
+const WriteTitle = styled.div`
+  margin-top: 12px;
+  font-weight: 600;
+`;
+
+const WriteFinishButton = styled.button`
+  border: 1px solid red;
+  border-radius: 13px;
+  width: 40px;
+  height: 25px;
+  text-align: center;
+  background-color: red;
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  margin-left: 30%;
+  margin-top: 10px;
+  padding-top: 5px;
+  cursor: pointer;
+  border: none; /* 버튼의 기본 테두리 제거 */
+  outline: none; /* 버튼의 기본 테두리 제거 */
+
+  &:hover {
+    background-color: #c00;
+  }
 `;
