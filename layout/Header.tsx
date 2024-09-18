@@ -5,15 +5,17 @@ import { useRouter } from "next/router";
 import ReadingGlasses from "../assets/header/ReadingGlasses.svg";
 import VericalDot from "../assets/header/VerticalDots.svg";
 import Back from "../assets/header/Back.svg";
+import GoBack from "../assets/header/GoBack.svg";
 const Header = () => {
   const router = useRouter();
   const ShowBack = router.pathname === "/content";
+  const Home = router.pathname === "/";
   //   const isActive = (path: string) => router.pathname.startsWith(path);
 
   return (
     <HeaderContainer>
       <HeaderBack onClick={() => router.push("/")}>
-        {ShowBack && <Back />}
+        {ShowBack ? <Back /> : !Home && <GoBack />}
       </HeaderBack>
 
       <HeaderItem>
