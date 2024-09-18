@@ -6,6 +6,7 @@ import Header from "./Header";
 import SearchHeader from "../components/SearchHeader";
 // import WriteHeader from "../components/WriteHeader";
 import PageTransition from "../components/PageTransition/PageTransition";
+import CommentFooter from "../components/CommentFooter";
 
 interface MainLayoutProps {
   children: ReactNode;
@@ -20,14 +21,10 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   const showSearchHeader = router.pathname === "/search";
   const showWriteHeader = router.pathname === "/write";
   const hideFooter = router.pathname === "/";
-
-  // 상태를 유지하기 위한 함수
-  const handleSubmit = () => {
-    // Write 컴포넌트의 handleSubmit 호출 로직을 추가합니다.
-    // `Write` 컴포넌트와 `handleSubmit`을 연결하는 방법이 필요합니다.
-    console.log("완료 버튼이 클릭되었습니다.");
-    // 필요한 로직을 여기에 추가합니다.
-  };
+  const commentFooter =
+    router.pathname === "/" ||
+    router.pathname === "/write" ||
+    router.pathname === "/search";
 
   return (
     <>
@@ -35,7 +32,8 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
         {showSearchHeader ? <SearchHeader /> : !hideHeader ? <Header /> : null}
 
         <Main>{children}</Main>
-        {hideFooter && <Footer />}
+        {hideFooter ? <Footer /> : !commentFooter && <CommentFooter />}
+        {/* // : !commentFooter && <CommentFooter /> */}
       </PageTransition>
     </>
   );
@@ -50,6 +48,7 @@ const Main = styled.main`
   margin: 0 auto;
   min-height: calc(100vh - 50px);
 
+  height: 100%;
   @media (min-width: 375px) {
     width: 430px;
   }
